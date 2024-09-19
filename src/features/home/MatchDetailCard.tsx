@@ -1,20 +1,10 @@
 import React from "react";
-import { Player } from "../../types/interfaces";
+import { MatchDetailProps } from "../../types/interfaces";
 import { formatTimestampToBrasilia } from "../../utils/timeStampToDate";
 import { FaCalendarDay, FaIdBadge, FaClock } from "react-icons/fa";
 import { GiSkills } from "react-icons/gi";
 import { useHeroContext } from "../../hooks/useHeroContext";
 import { getHeroNameById } from "../../utils/getHeroByNameId";
-
-interface MatchDetailProps {
-  activate_time: number;
-  average_mmr: number;
-  match_id: string;
-  last_update_time: number;
-  radiant_score: number;
-  dire_score: number;
-  players: Player[];
-}
 
 const MatchDetailCard: React.FC<MatchDetailProps> = ({
   activate_time,

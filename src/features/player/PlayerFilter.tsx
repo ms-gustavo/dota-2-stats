@@ -1,11 +1,5 @@
 import React from "react";
-
-interface PlayerFilterProps {
-  filter: string;
-  handleFilterChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  searchTerm: string;
-  onChange: (value: React.SetStateAction<string>) => void;
-}
+import { PlayerFilterProps } from "../../types/interfaces";
 
 const PlayerFilter: React.FC<PlayerFilterProps> = ({
   filter,

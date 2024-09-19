@@ -1,15 +1,6 @@
 import React from "react";
 import { FaCalendarAlt, FaGlobe, FaUser } from "react-icons/fa";
-
-interface ProPlayerCardProps {
-  avatar: string;
-  personaname: string;
-  team_name: string;
-  loccountrycode: string;
-  last_login: string;
-  last_match_time: string;
-  is_locked: boolean;
-}
+import { ProPlayerCardProps } from "../../types/interfaces";
 
 const ProPlayerCard: React.FC<ProPlayerCardProps> = ({
   avatar,

@@ -1,10 +1,5 @@
 import React from "react";
-
-interface MatchDetailsHeaderProps {
-  radiantScore: number;
-  direScore: number;
-  radiantWin: boolean;
-}
+import { MatchDetailsHeaderProps } from "../../../types/interfaces";
 
 const MatchDetailsHeader: React.FC<MatchDetailsHeaderProps> = ({
   radiantScore,

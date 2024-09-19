@@ -1,10 +1,6 @@
 import React from "react";
-import { RecentMatchesProps } from "../../types/interfaces";
+import { RecentMatchesListComponentProps } from "../../types/interfaces";
 import RecentMatchCard from "../../features/player/matchDetails/RecentMatchCard";
-
-interface RecentMatchesListComponentProps {
-  recentMatches: RecentMatchesProps[];
-}
 
 const RecentMatchesListComponent: React.FC<RecentMatchesListComponentProps> = ({
   recentMatches,

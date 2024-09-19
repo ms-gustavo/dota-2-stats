@@ -1,14 +1,5 @@
 import React from "react";
-
-interface HeroStatCardProps {
-  localized_name: string;
-  pub_pick: number;
-  pub_win: number;
-  pubs_winRate: string;
-  pro_pick: number;
-  pro_win: number;
-  pro_ban: number;
-}
+import { HeroStatCardProps } from "../../types/interfaces";
 
 const HeroStatCard: React.FC<HeroStatCardProps> = ({
   localized_name,

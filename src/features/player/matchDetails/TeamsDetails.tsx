@@ -1,14 +1,9 @@
 import React from "react";
-import { PlayerStats } from "../../../types/interfaces";
+import { TeamDetailsProps } from "../../../types/interfaces";
 import { getHeroNameById } from "../../../utils/getHeroByNameId";
 import { useHeroContext } from "../../../hooks/useHeroContext";
 import { GiBroadsword, GiSkullCrossedBones } from "react-icons/gi";
 import { FaHandsHelping, FaTrophy } from "react-icons/fa";
-
-interface TeamDetailsProps {
-  teamTitle: string;
-  team: PlayerStats[];
-}
 
 const TeamDetails: React.FC<TeamDetailsProps> = ({ teamTitle, team }) => {
   const { heroStats } = useHeroContext();

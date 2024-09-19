@@ -1,11 +1,5 @@
 import React from "react";
-
-interface ButtonProps {
-  label: string;
-  onClick: () => void;
-  type?: "button" | "submit" | "reset";
-  className?: string;
-}
+import { ButtonProps } from "../types/interfaces";
 
 const Button: React.FC<ButtonProps> = ({
   label,

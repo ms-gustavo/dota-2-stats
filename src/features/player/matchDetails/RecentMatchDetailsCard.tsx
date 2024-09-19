@@ -1,12 +1,7 @@
 import React from "react";
-import { IndividualRecentMatchDetailProps } from "../../../types/interfaces";
+import { MatchDetailsCardProps } from "../../../types/interfaces";
 import MatchDetailsHeader from "./MatchDetailsHeader";
 import TeamDetails from "./TeamsDetails";
-
-interface MatchDetailsCardProps {
-  matchDetails: IndividualRecentMatchDetailProps;
-  radiantWin: boolean;
-}
 
 const RecentMatchDetailsCard: React.FC<MatchDetailsCardProps> = ({
   matchDetails,

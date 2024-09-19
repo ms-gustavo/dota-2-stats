@@ -1,12 +1,7 @@
 import React from "react";
 import { calculateWinrate } from "../../utils/calculateWinRate";
-import { PlayerDetails, PlayersWL } from "../../types/interfaces";
+import { PlayerInfoCardProps } from "../../types/interfaces";
 import RankDisplay from "./RankDisplay";
-
-interface PlayerInfoCardProps {
-  playerDetails: PlayerDetails;
-  playerWL: PlayersWL;
-}
 
 const PlayerInfoCard: React.FC<PlayerInfoCardProps> = ({
   playerDetails,

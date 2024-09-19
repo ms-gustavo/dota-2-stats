@@ -1,24 +1,7 @@
 import React from "react";
 import { getHeroNameById } from "../../../utils/getHeroByNameId";
 import { calculateWinrate } from "../../../utils/calculateWinRate";
-import { HeroStatType } from "../../../types/interfaces";
-
-interface HeroStatsProps {
-  filteredHeroes: FilteredHeroes[];
-  filter: string;
-  heroStats: HeroStatType[];
-}
-
-interface FilteredHeroes {
-  hero_id: number;
-  last_played: number;
-  games: number;
-  win: number;
-  with_games: number;
-  with_win: number;
-  against_games: number;
-  against_win: number;
-}
+import { HeroStatsProps } from "../../../types/interfaces";
 
 const HeroStats: React.FC<HeroStatsProps> = ({
   filteredHeroes,

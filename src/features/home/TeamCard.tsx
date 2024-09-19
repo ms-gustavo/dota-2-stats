@@ -1,15 +1,6 @@
+import { TeamCardProps } from "../../types/interfaces";
 import { timeAgo } from "../../utils/timeAgo";
 import { FaTrophy, FaChartLine, FaChartBar } from "react-icons/fa";
-
-interface TeamCardProps {
-  last_match_time: number;
-  logo_url: string;
-  name: string;
-  tag: string;
-  rating: number;
-  wins: number;
-  losses: number;
-}
 
 const TeamCard: React.FC<TeamCardProps> = ({
   last_match_time,

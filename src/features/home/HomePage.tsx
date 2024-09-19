@@ -16,22 +16,30 @@ import MatchDeatilListComponent from "../../components/HomePageComponents/MatchD
 import SearchPlayerListComponent from "../../components/HomePageComponents/SearchPlayersListComponent";
 
 const HomePage: React.FC = () => {
-  const { heroStats } = useHeroContext();
-  const { proPlayers } = useProPlayerContext();
-  const { teams } = useTeamsContext();
-  const { currentlyOnGoingGames } = useCurrentlyOnGoingGamesContext();
+  const { heroStats, heroStatsError } = useHeroContext();
+  const { proPlayers, proPlayersError } = useProPlayerContext();
+  const { teams, teamsError } = useTeamsContext();
+  const { currentlyOnGoingGames, currentlyOnGoingGamesContextTypeError } =
+    useCurrentlyOnGoingGamesContext();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchResults, setSearchResults] = useState<SearchPlayerType[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
       setIsSearching(true);
-      searchPlayerByName(debouncedSearchTerm).then((results) => {
-        setSearchResults(results);
-        setIsSearching(false);
-      });
+      setIsError(false);
+      searchPlayerByName(debouncedSearchTerm)
+        .then((results) => {
+          setSearchResults(results);
+          setIsSearching(false);
+        })
+        .catch((error) => {
+          setIsError(true);
+          console.error(`Failed to fetch search results: ${error.message}`);
+        });
     } else {
       setSearchResults([]);
     }
@@ -52,7 +60,7 @@ const HomePage: React.FC = () => {
           className="p-2 w-full border rounded-lg text-primary"
         />
       </div>
-      {isSearching ? (
+      {isSearching && !isError ? (
         <Loader message="Carregando" />
       ) : searchResults.length > 0 ? (
         <SearchPlayerListComponent searchResults={searchResults} />
@@ -62,24 +70,33 @@ const HomePage: React.FC = () => {
             <div id="currentlyOngoingGames" className="p-2 lg:pt-20">
               <CollapsibleContainer title="Games ao vivo">
                 <MatchDeatilListComponent
+                  currentlyOnGoingGamesContextTypeError={
+                    currentlyOnGoingGamesContextTypeError
+                  }
                   matchDetails={currentlyOnGoingGames}
                 />
               </CollapsibleContainer>
             </div>
             <div id="proPlayers" className="p-2 lg:pt-20">
               <CollapsibleContainer title="Top 10 Pro Players">
-                <ProPlayersListComponent proPlayers={proPlayers} />
+                <ProPlayersListComponent
+                  proPlayers={proPlayers}
+                  proPlayersError={proPlayersError}
+                />
               </CollapsibleContainer>
             </div>
             <div id="teams" className="p-2 lg:pt-20">
               <CollapsibleContainer title="Top 10 Pro Times">
-                <TeamsListComponent teams={teams} />
+                <TeamsListComponent teams={teams} teamsError={teamsError} />
               </CollapsibleContainer>
             </div>
           </div>
           <div id="heroStats" className="lg:w-1/3 lg:pt-20">
             <CollapsibleContainer title="Estatísticas dos Heróis">
-              <HeroStatListComponent heroStats={heroStats} />
+              <HeroStatListComponent
+                heroStats={heroStats}
+                heroStatsError={heroStatsError}
+              />
             </CollapsibleContainer>
           </div>
         </div>

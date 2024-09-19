@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 interface CurrentlyOnGoingGamesContextType {
   currentlyOnGoingGames: MatchDetails[];
   isLoading: boolean;
+  currentlyOnGoingGamesContextTypeError: boolean;
 }
 
 export const CurrentlyOnGoingGamesContext = createContext<
@@ -19,9 +20,14 @@ export const CurrentlyOnGoingGamesProvider: React.FC<{
     MatchDetails[]
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [
+    currentlyOnGoingGamesContextTypeError,
+    setCurrentlyOnGoingGamesContextTypeError,
+  ] = useState<boolean>(false);
 
   useEffect(() => {
     async function loadCurrentlyOnGoingGames() {
+      setCurrentlyOnGoingGamesContextTypeError(false);
       try {
         const currentlyOnGoingGames = await fetchCurrentlyOnGoingGames();
         setCurrentlyOnGoingGames(currentlyOnGoingGames.slice(-6));
@@ -29,6 +35,7 @@ export const CurrentlyOnGoingGamesProvider: React.FC<{
         console.error(
           `Failed to fetch Currently Games: ${(error as Error).message}`
         );
+        setCurrentlyOnGoingGamesContextTypeError(true);
       } finally {
         setIsLoading(false);
       }
@@ -39,7 +46,11 @@ export const CurrentlyOnGoingGamesProvider: React.FC<{
 
   return (
     <CurrentlyOnGoingGamesContext.Provider
-      value={{ currentlyOnGoingGames, isLoading }}
+      value={{
+        currentlyOnGoingGames,
+        isLoading,
+        currentlyOnGoingGamesContextTypeError,
+      }}
     >
       {isLoading ? <Loader message="Loading Currently Games..." /> : children}
     </CurrentlyOnGoingGamesContext.Provider>

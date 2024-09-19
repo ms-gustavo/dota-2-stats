@@ -30,6 +30,7 @@ export interface ProPlayerType {
 
 export interface ProPlayersListComponentProps {
   proPlayers: ProPlayerType[];
+  proPlayersError: boolean;
 }
 
 export interface TeamType {
@@ -45,6 +46,7 @@ export interface TeamType {
 
 export interface TeamsListComponentProps {
   teams: TeamType[];
+  teamsError: boolean;
 }
 
 export interface HeroStatType {
@@ -112,6 +114,7 @@ export interface HeroStatType {
 
 export interface HeroStatListComponentProps {
   heroStats: HeroStatType[];
+  heroStatsError: boolean;
 }
 
 export interface Player {
@@ -132,6 +135,7 @@ export interface Player {
 
 export interface MatchDetailsListComponentProps {
   matchDetails: MatchDetails[];
+  currentlyOnGoingGamesContextTypeError: boolean;
 }
 
 export interface MatchDetails {
@@ -421,4 +425,106 @@ export interface PlayerStats {
         hero_healing_per_min: Benchmarks;
         tower_damage: Benchmarks;
       };
+}
+
+export interface HeroStatCardProps {
+  localized_name: string;
+  pub_pick: number;
+  pub_win: number;
+  pubs_winRate: string;
+  pro_pick: number;
+  pro_win: number;
+  pro_ban: number;
+}
+
+export interface MatchDetailProps {
+  activate_time: number;
+  average_mmr: number;
+  match_id: string;
+  last_update_time: number;
+  radiant_score: number;
+  dire_score: number;
+  players: Player[];
+}
+
+export interface ProPlayerCardProps {
+  avatar: string;
+  personaname: string;
+  team_name: string;
+  loccountrycode: string;
+  last_login: string;
+  last_match_time: string;
+  is_locked: boolean;
+}
+
+export interface TeamCardProps {
+  last_match_time: number;
+  logo_url: string;
+  name: string;
+  tag: string;
+  rating: number;
+  wins: number;
+  losses: number;
+}
+
+export interface HeroStatsProps {
+  filteredHeroes: FilteredHeroes[];
+  filter: string;
+  heroStats: HeroStatType[];
+}
+
+export interface FilteredHeroes {
+  hero_id: number;
+  last_played: number;
+  games: number;
+  win: number;
+  with_games: number;
+  with_win: number;
+  against_games: number;
+  against_win: number;
+}
+
+export interface MatchDetailsHeaderProps {
+  radiantScore: number;
+  direScore: number;
+  radiantWin: boolean;
+}
+
+export interface MatchDetailsCardProps {
+  matchDetails: IndividualRecentMatchDetailProps;
+  radiantWin: boolean;
+}
+
+export interface TeamDetailsProps {
+  teamTitle: string;
+  team: PlayerStats[];
+}
+
+export interface PlayerFilterProps {
+  filter: string;
+  handleFilterChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  searchTerm: string;
+  onChange: (value: React.SetStateAction<string>) => void;
+}
+
+export interface PlayerInfoCardProps {
+  playerDetails: PlayerDetails;
+  playerWL: PlayersWL;
+}
+
+export interface RecentMatchesListComponentProps {
+  recentMatches: RecentMatchesProps[];
+}
+
+export interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  type?: "button" | "submit" | "reset";
+  className?: string;
+}
+
+export interface CardProps {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
 }

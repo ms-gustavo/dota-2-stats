@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 interface HeroContextType {
   heroStats: HeroStatType[];
   isLoading: boolean;
+  heroStatsError: boolean;
 }
 
 export const HeroContext = createContext<HeroContextType | undefined>(
@@ -17,9 +18,11 @@ export const HeroProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [heroStats, setHeroStats] = useState<HeroStatType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [heroStatsError, setHeroStatsError] = useState<boolean>(false);
 
   useEffect(() => {
     async function loadHeroStats() {
+      setHeroStatsError(false);
       try {
         const stats = await fetchHeroStats();
         setHeroStats(stats);
@@ -27,6 +30,7 @@ export const HeroProvider: React.FC<{ children: ReactNode }> = ({
         console.error(
           `Failed to fetch Heroes Stats: ${(error as Error).message}`
         );
+        setHeroStatsError(true);
       } finally {
         setIsLoading(false);
       }
@@ -36,8 +40,12 @@ export const HeroProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <HeroContext.Provider value={{ heroStats, isLoading }}>
-      {isLoading ? <Loader message="Loading Heroes Stats..." /> : children}
+    <HeroContext.Provider value={{ heroStats, isLoading, heroStatsError }}>
+      {isLoading ? (
+        <Loader message="Obtendo estatísticas de heróis..." />
+      ) : (
+        children
+      )}
     </HeroContext.Provider>
   );
 };
