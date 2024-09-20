@@ -4,6 +4,7 @@ import { getHeroNameById } from "../../../utils/getHeroByNameId";
 import { useHeroContext } from "../../../hooks/useHeroContext";
 import { GiBroadsword, GiSkullCrossedBones } from "react-icons/gi";
 import { FaHandsHelping, FaTrophy } from "react-icons/fa";
+import PlayerItems from "../PlayerItems";
 
 const TeamDetails: React.FC<TeamDetailsProps> = ({ teamTitle, team }) => {
   const { heroStats } = useHeroContext();
@@ -58,6 +59,9 @@ const TeamDetails: React.FC<TeamDetailsProps> = ({ teamTitle, team }) => {
                 <span className="text-experience">
                   XPM: {player.xp_per_min}
                 </span>
+              </div>
+              <div className="flex items-center">
+                <PlayerItems player={player} />
               </div>
             </div>
           ))}

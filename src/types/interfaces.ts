@@ -528,3 +528,38 @@ export interface CardProps {
   children: React.ReactNode;
   className?: string;
 }
+
+interface Ability {
+  type: string;
+  title: string;
+  description: string;
+}
+
+interface Attribute {
+  key: string;
+  display?: string;
+  value: string | number;
+}
+
+export interface ItemProps {
+  abilities: Ability[];
+  hint: string[];
+  id: number;
+  img: string;
+  dname: string;
+  qual: string;
+  cost: number;
+  behavior: string;
+  dispellable?: string;
+  target_team?: string;
+  target_type?: string[];
+  notes?: string;
+  attrib: Attribute[];
+  mc?: number | boolean;
+  hc?: boolean;
+  cd?: number;
+  lore?: string;
+  components?: string[] | null;
+  created: boolean;
+  charges: boolean;
+}

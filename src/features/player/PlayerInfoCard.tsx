@@ -43,13 +43,13 @@ const PlayerInfoCard: React.FC<PlayerInfoCardProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-darkLighterGray p-4 rounded-lg">
             <h2 className="text-xl font-bold text-gold mb-2">Rank</h2>
-            <p className="text-lightText text-lg mb-2">
+            <div className="text-lightText text-lg mb-2">
               {playerDetails.rank_tier ? (
                 <RankDisplay rank_tier={playerDetails.rank_tier} />
               ) : (
                 "Unranked"
               )}
-            </p>
+            </div>
             <p className="text-lightText text-lg">
               Classificação:{" "}
               {playerDetails.leaderboard_rank

@@ -15,6 +15,7 @@ import {
 } from "../../../types/interfaces";
 import { getMatchDeatils } from "../../../services/api";
 import RecentMatchDetailsCard from "./RecentMatchDetailsCard";
+import ErrorContainer from "../../../components/ErrorContainer";
 
 const RecentMatchCard: React.FC<RecentMatchCardProps> = ({ match }) => {
   const { heroStats } = useHeroContext();
@@ -22,13 +23,19 @@ const RecentMatchCard: React.FC<RecentMatchCardProps> = ({ match }) => {
     useState<IndividualRecentMatchDetailProps>(
       {} as IndividualRecentMatchDetailProps
     );
+  const [isError, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const data = async () => {
-      const response = await getMatchDeatils(match.match_id.toString());
-      setRecentMatchDetails(response);
+      setError(false);
+      try {
+        const response = await getMatchDeatils(match.match_id.toString());
+        setRecentMatchDetails(response);
+      } catch (error: unknown) {
+        console.error(error);
+        setError(true);
+      }
     };
-    console.log("match", match);
     data();
   }, [match]);
 
@@ -66,10 +73,17 @@ const RecentMatchCard: React.FC<RecentMatchCardProps> = ({ match }) => {
             <FaHandsHelping className="ml-2 mr-2 text-yellow-400" />
             <span className="text-gray-300">{match.assists}</span>
           </div>
-          <RecentMatchDetailsCard
-            matchDetails={recentMatchDetails}
-            radiantWin={match.radiant_win}
-          />
+          {!isError ? (
+            <RecentMatchDetailsCard
+              matchDetails={recentMatchDetails}
+              radiantWin={match.radiant_win}
+            />
+          ) : (
+            <ErrorContainer
+              message={"Erro ao carregar detalhes da partida"}
+              showHelperText={false}
+            />
+          )}
         </>
       )}
     </>
